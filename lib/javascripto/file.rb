@@ -8,10 +8,12 @@ module Javascripto
 
     # File Repository
     @@files = {}
-
     @@path_lookup_cache = {}
-    @@js_root = ::Rails.root.join('public/javascripts')
-    @@load_path = ['lib', *Dir.glob(::File.join(@@js_root, "vendor/*")).map{|entry| "vendor/#{::File.basename(entry)}" } ]
+
+    def self.js_root=(root)
+      @@js_root = root
+      @@load_path = ['lib', *Dir.glob(::File.join(@@js_root, "vendor/*")).map{|entry| "vendor/#{::File.basename(entry)}" } ]
+    end
 
     attr_accessor :path, :package
 

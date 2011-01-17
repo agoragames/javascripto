@@ -14,9 +14,9 @@ module Javascripto
     end
 
     def add_files(*file_paths)
-      # Make sure lib/application is included as first dependency, but only when somthing else has been added.
+      # Make sure config.js is included as first dependency, but only when somthing else has been added.
       if @required_packages.empty?
-        file_paths.unshift 'lib/application'
+        file_paths.unshift 'config'
       end
 
       file_paths.each do |file_path|
