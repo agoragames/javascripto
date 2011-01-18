@@ -17,8 +17,22 @@ module Javascripto
 
     attr_accessor :path, :package
 
+    def resource_path
+      @remote_url || @path
+    end
+
     def initialize(path)
       @path = path
+
+      # Handle remote packages.
+      first_line = ::File.open(@@js_root.join(@path + JS), &:gets)
+      if first_line
+        @remote_url = /\s*^\/\/\s*use_remote_package(.*)/.match(first_line)
+        if @remote_url
+          @remote_url = @remote_url.captures[0].strip
+          @package = self
+        end
+      end
     end
 
     def file_dependencies
@@ -66,6 +80,12 @@ module Javascripto
     end
 
     # Override Package Methods
+
+    def cache
+      # Disable rails caching for single file packages
+      nil
+    end
+
     def package_files
       [self]
     end

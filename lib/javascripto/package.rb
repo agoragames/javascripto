@@ -25,5 +25,10 @@ module Javascripto
         file.package = self
       end
     end
+
+    # A unique key to be use for caching.
+    def cache
+      @package_name
+    end
   end
 end
