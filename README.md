@@ -16,28 +16,16 @@ For integration with a rails application add javascripto-rails to your gem file 
     gem 'javascripto-rails'
 
 #### View Setup
-In your rails layout, add the following snippet to the head of the page.
-    <% require_app_modules() %>
+In your rails layout, add the following line to the head of the page.
 
-    <%# Render Packages %>
-    <%- if required_packages.any? -%>
-      <%- required_packages.each do |package| -%>
-        <%- if package.cache -%>
-          <%= javascript_include_tag package.package_files.map{ |file| file.resource_path }, :cache => package.package_name %>
-        <%- else -%>
-          <%= javascript_include_tag package.package_files.map{ |file| file.resource_path } %>
-        <%- end -%>
-      <%- end -%>
-    <%- end -%>
+haml
 
-    <%# Render Initializers %>
-    <%- if app_modules.any? -%>
-      <script type="text/javascript" charset="utf-8">
-        <%- app_modules.each do |app_module| -%>
-          $(app.<%=app_module-%>);
-        <%- end -%>
-      </script>
-    <%- end -%>
+    = javascripto_include
+
+erb
+
+    <%= javascripto_include %>
+
 
 #### Project Organization
 Organize the files in your  directory as follows.
@@ -140,9 +128,9 @@ Example:
       - extras:
         - app/obscure_weighty_feature
 
-In the example, two packages are created (`defaults` and `extras`).The `defaults` package will include `app/status.js`, `app/profile.js`, `app/wall_post.js` as well as all of there dependencies. It will also include config.js and any of it's dependencies because it is the first package your declare. The first package will always include `config.js`.
+In the example, two packages are created (_defaults_ and _extras_).The _defaults_ package will include _app/status.js_, _app/profile.js_, _app/wall_post.js_ as well as all of there dependencies. It will also include _config.js_ and any of it's dependencies because it is the first package your declare. The first package will always include _config.js_.
 
-The `extras` package will include `app/obscure_weighty_feature.js` and any of it's dependencies not already included in `defaults`. If it does have dependancies which where packages in defaults, extras will always trigger defaults to be loaded first. In this basic example it would because all files in you application have an implicit dependency on `config.js` which could be packaged in defaults. When the files are stitched the name of the file will match the name of the package, therefore `dafulats` would become `deaults.js`
+The `extras` package will include _app/obscure_weighty_feature.js_ and any of it's dependencies not already included in _defaults_. If it does have dependancies which where packages in defaults, extras will always trigger defaults to be loaded first. In this basic example it would because all files in you application have an implicit dependency on _config.js_ which could be packaged in defaults. When the files are stitched the name of the file will match the name of the package, therefore _defaults_ would become _defaults.js_
 
 Please note that when referencing app modules in the package directory you need to include app/ before the file path. This is because app is not included in the load_path so in this case we provide a path relative to the root which is included in the load path.
 
