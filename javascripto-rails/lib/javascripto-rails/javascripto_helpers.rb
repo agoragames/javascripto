@@ -17,10 +17,6 @@ module Javascripto
         add_files(*files)
       end
 
-      # Call To include require app_modules files.
-      def require_app_modules
-        add_files(*app_modules.map{ |app_module| "app/#{app_module}" })
-      end
 
       # All Required Packages.
       def required_packages
@@ -32,11 +28,39 @@ module Javascripto
         @app_modules ||= []
       end
 
+      def javascripto_include
+
+        # Require App Modules
+        add_files(*app_modules.map{ |app_module| "app/#{app_module}" })
+
+        content = []
+
+        # Render Packages
+        if required_packages.any?
+          required_packages.each do |package|
+            if package.cache
+              content << javascript_include_tag(package.package_files.map{ |file| file.resource_path }, :cache => package.package_name)
+            else
+              content << javascript_include_tag(package.package_files.map{ |file| file.resource_path })
+            end
+          end
+        end
+
+        # Render Initializers
+        if app_modules.any?
+          content << content_tag('script', (app_modules.map{ |m| "\n  $(app.#{m});" } << "\n").join(),'type' => Mime::JS)
+        end
+
+        content.join("\n").html_safe
+      end
+
+
       private
 
       def add_files(*files)
         required_packages.add_files(*files)
       end
+
     end
   end
 end
