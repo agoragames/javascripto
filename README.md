@@ -1,6 +1,8 @@
-Javascripto [![Build Status](http://travis-ci.org/agoragames/javascripto.png)](http://travis-ci.org/agoragames/javascripto)
+Javascripto [![Project Status](http://stillmaintained.com/agoragames/javascripto.png)](http://stillmaintained.com/agoragames/javascripto) [![Build Status](http://travis-ci.org/agoragames/javascripto.png)](http://travis-ci.org/agoragames/javascripto)
 ============
 Client-side Javascript Application Framework
+
+
 
 Installation
 -------------
