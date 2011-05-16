@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "javascripto"
 
   s.add_development_dependency "rspec"
+  s.add_development_dependency "cucumber"
 
   s.files         = `git ls-files | grep javascripto-rails -v`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
