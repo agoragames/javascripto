@@ -6,19 +6,22 @@ Javascripto helps organize and deliver client-side javascript. It provides a fam
 Rails Installation
 ------------------
 
-Bundle javascripto-rails
+[Bundle][1] javascripto-rails
 
     gem 'javascripto-rails'
 
-Run the generator
+Run the [rails generator][2]
 
     rails generator javascripto:install
 
-Visit [javascripto.org][1] for complete documentation.
+Visit [javascripto.org][3] for complete documentation.
 
 
 License
 -------
 Copyright (c) 2010 Agora Games, released under the MIT license
 
-  [1]: http://javascripto.org
+  [1]: http://gembundler.com/
+  [2]: http://rubyonrails.org/
+  [3]: http://javascripto.org/
+
