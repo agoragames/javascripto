@@ -1,0 +1,5 @@
+Description:
+    Initialize Javascripto for your application.
+
+Examples:
+    `script/rails generate javascripto:rails`
