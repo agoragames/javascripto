@@ -2,8 +2,8 @@ require 'bundler'
 Bundler::GemHelper.install_tasks
 module Bundler
   class GemHelper
-    def tag_version
-      "javascripto-rails v#{version}"
+    def version_tag
+      "javascripto-rails-v#{version}"
     end
   end
 end
